@@ -387,6 +387,35 @@ h1{font-size:clamp(28px,7.5vw,36px)}
 .ad-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px 0 4px}
 .ad-btn{border:0;cursor:pointer;border-radius:999px;padding:10px 18px;font-size:15px;font-weight:800;font-family:'Hind',sans-serif;color:#4a2500;background:linear-gradient(180deg,#fff3a3,#ffb700 55%,#ff8c00);box-shadow:0 0 16px rgba(255,215,0,0.7),0 4px 12px rgba(0,0,0,0.4)}
 .ad-btn-magic{color:#fff;background:linear-gradient(180deg,#ff8c42,#c2185b 70%,#7b1fa2)}
+/* ===== FIX 2026-11-04: normal (chhote) mobile par dock hamesha dikhe =====
+   Reason: .stage ki min-height 620px + .middle-clear ki min-height 110px milkar
+   content ko viewport se lamba bana dete the. Browser toolbar / WhatsApp in-app
+   browser par visible height aur kam ho jati thi, to dock (naam + WhatsApp)
+   fold ke neeche chala jata tha aur user ko scroll ka pata nahi chalta tha.
+   Fix: stage ko toolbar-safe svh par lao, min-height hatao, middle-clear ko
+   shrink hone do (0 tak), aur dock ko sticky + shrink-proof banao, taaki
+   naam + WhatsApp button bina scroll ke hamesha dikhe. Middle scene clear
+   rehta hai, bas khali jagah sikudti hai, content nahi kat-ta. */
+.stage{height:100svh !important;min-height:0 !important;max-height:100svh !important}
+.content{overflow-y:auto !important}
+.middle-clear{flex:1 1 0 !important;min-height:0 !important}
+.dock{flex-shrink:0 !important;position:sticky !important;bottom:0 !important;z-index:30 !important}
+@media (max-height:900px){
+  .content{padding-top:20px !important}
+  .script-img{max-width:220px !important}
+  .sender span{font-size:26px !important}
+  .diya-btn{width:100px !important;height:100px !important}
+  .countdown{padding:6px 8px !important;margin-top:4px !important}
+}
+@media (max-height:700px){
+  .content{padding-top:14px !important}
+  .script-img{max-width:190px !important}
+  .sender span{font-size:23px !important}
+  .diya-btn{width:88px !important;height:88px !important}
+  .dock{padding:6px 10px !important}
+  .dock input{padding:8px 10px !important}
+}
+@media (min-width:521px){.stage{height:calc(100dvh - 36px) !important;max-height:none !important}}
 </style>
 </head>
 <body>
@@ -665,11 +694,10 @@ diyaBtn.addEventListener("click", ignite);
 
 $("againBtn").addEventListener("click", ()=>{ fxOn=true; launch(); launch(); for(let k=0;k<15;k++) addPetal(); if(actx && musicOn) shankh(); toast("🪔 Phir se jal gaya!"); });
 
-/* Share */
+/* Share - AD-FREE per user decision 2026-11-04: naam likhkar WhatsApp share par koi ad nahi dikhega, taaki share rukna nahi aur retention/viral loop badhe. Ads sirf diya tap (Adsterra #1) aur jadu button (Adsterra rotation) par hain. */
 function doShare(){
   const name = cleanName($("myName").value);
   if(!name){ $("myName").classList.add("shake"); setTimeout(()=>$("myName").classList.remove("shake"),450); $("myName").focus(); toast("Pehle naam likhein 👆"); return; }
-  try{ if(!sessionStorage.getItem("ad2_done")){ const a=pickLink(MONETAG_LINKS,"ad2_link"); if(a){ openAd(a); sessionStorage.setItem("ad2_done","1"); } } }catch(e){}
   const wa = "https://wa.me/?text=" + encodeURIComponent(shareMessageFor(name));
   const w = window.open(wa, "_blank", "noopener");
   if(!w) setTimeout(()=>{ location.href = wa; },250);
