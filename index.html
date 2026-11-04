@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>🪔 Shree Ram Ayodhya Aagman | Shubh Deepavali</title>
 <meta name="theme-color" content="#1a0b2e">
-<meta property="og:title" content="🪔 Shree Ram Ji ke Ayodhya Aagman ki Shubhkamnayein">
-<meta property="og:description" content="Deep jalayein aur shubhkamna apno tak pahunchayein. Jai Shree Ram!">
+<meta property="og:title" content="🪔 आपके लिए एक खास दीप जल रहा है!">
+<meta property="og:description" content="श्री राम जी अयोध्या आ गए हैं — दीप जलाने के लिए इस लिंक को खोलें!">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -527,7 +527,7 @@ function toast(m){ const t=$("toast"); t.textContent=m; t.classList.add("show");
 function baseUrl(){ try{ return location.href.split("?")[0].split("#")[0]; }catch(e){ return "https://aapka-domain.com/"; } }
 function shareLinkFor(n){ return baseUrl() + "?n=" + encodeURIComponent(n); }
 function shareMessageFor(n){
-  return "🪔 *" + n + " ki taraf se shubhkamnayein* 🙏\n\nPushpak Viman se Shree Ram Ji Ayodhya aa rahe hain! ✨\nDeep jalayein:\n" + shareLinkFor(n) + "\n\n🙏 Jai Shree Ram • Shubh Deepavali";
+  return "🪔 *" + n + " ने दीपावली के लिए आपको शुभकामनाएं भेजी हैं!* 🙏\n\n*✨ श्री राम जी अयोध्या आ गए हैं — और आपके लिए एक दीप जलाया गया है!*\n*👇 इस दीप को जलाने के लिए नीचे वाले लिंक को खोलें:*\n" + shareLinkFor(n) + "\n\n*🙏 जय श्री राम • शुभ दीपावली*";
 }
 const sender = cleanName(new URLSearchParams(location.search).get("n") || "");
 if(sender){
