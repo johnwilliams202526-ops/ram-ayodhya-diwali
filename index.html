@@ -692,12 +692,11 @@ diyaBtn.addEventListener("click", ignite);
      Har button par ad sirf genuine click par, new tab me, ek baar per session,
      taaki baar-baar tap par ad spam na ho aur page wahi lit rahe. */
   function doJadu(){ try{ launch(); launch(); }catch(e){} try{ for(let k=0;k<12;k++) addPetal(); }catch(e){} try{ if(navigator.vibrate) navigator.vibrate(40); }catch(e){} }
-  function openDirectOnce(doneKey, linkKey){ try{ if(!sessionStorage.getItem(doneKey)){ const a=pickLink(DIRECT_LINKS,linkKey); if(a){ openAd(a); sessionStorage.setItem(doneKey,"1"); } } }catch(e){} }
   var diyaTextBtn = $("diyaTextBtn"), jaduBtn = $("jaduBtn");
-  if(diyaTextBtn) diyaTextBtn.addEventListener("click", ()=>{ if(!lit){ ignite(); } else { doJadu(); openDirectOnce("ad_diyatext_done","ad_diyatext_link"); toast("✨ Jadu! 🪔"); } });
-  if(jaduBtn) jaduBtn.addEventListener("click", ()=>{ if(!lit){ ignite(); return; } doJadu(); openDirectOnce("ad3_done","ad3_link"); toast("✨ Jadu dekho! 🪔"); });
+  if(diyaTextBtn) diyaTextBtn.addEventListener("click", ()=>{ if(!lit){ ignite(); } else { doJadu(); toast("✨ Jadu! 🪔"); } });
+  if(jaduBtn) jaduBtn.addEventListener("click", ()=>{ if(!lit){ ignite(); return; } doJadu(); toast("✨ Jadu dekho! 🪔"); });
 
-$("againBtn").addEventListener("click", ()=>{ fxOn=true; launch(); launch(); for(let k=0;k<15;k++) addPetal(); if(actx && musicOn) shankh(); openDirectOnce("ad_again_done","ad_again_link"); toast("🪔 Phir se jal gaya!"); });
+$("againBtn").addEventListener("click", ()=>{ fxOn=true; launch(); launch(); for(let k=0;k<15;k++) addPetal(); if(actx && musicOn) shankh(); toast("🪔 Phir se jal gaya!"); });
 
 /* Share - AD-FREE per user decision 2026-11-04: naam likhkar WhatsApp share par koi ad nahi dikhega, taaki share rukna nahi aur retention/viral loop badhe. Ads sirf diya tap (Adsterra #1), Diye jalao, Touch karo jadu dekho aur Phir Jalayein par hain (har button ek baar per session). */
 function doShare(){
